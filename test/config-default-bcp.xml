@@ -1,0 +1,174 @@
+<configuration>
+    <property>
+        <name>jobTracker</name>
+        <value>{{jobTracker}}</value>
+        <description>
+            Job tracker
+        </description>
+    </property>
+
+    <property>
+        <name>nameNode</name>
+        <value>{{nameNode}}</value>
+        <description>
+            Name node
+        </description>
+    </property>
+
+    <property>
+        <name>queueName</name>
+        <value>default</value>
+        <description>
+            Queue
+        </description>
+    </property>
+
+    <property>
+        <name>email.notification.to</name>
+        <value>{{email.notification.recipients}}</value>
+        <description>
+            Comma separated list of emails which will be notified if job fails
+        </description>
+    </property>
+
+    <property>
+        <name>qdm.format.template</name>
+        <value>${auditId} | {{partition_path}} | {{number_of_files}} | {{number_of_records}}</value>
+        <description>
+            QDM file format. partition_path, number_of_files and number_of_records are calculated in workflow
+        </description>
+    </property>
+
+    <property>
+        <name>qdm.filename</name>
+        <value>qdm_${auditId}_{{partition}}.dat</value>
+        <description>
+            QDM file name template. "{{partition}}" will be replaced in workflow.
+        </description>
+    </property>
+
+    <!-- Properties mentioned below will affect all jobs. They aren't expected to be changed for one specific job-->
+    <property>
+        <name>oozie.use.system.libpath</name>
+        <value>true</value>
+        <description>
+            Oozie use system lib path
+        </description>
+    </property>
+
+    <property>
+        <name>row.count.type</name>
+        <value>csv</value>
+        <description>
+            Row count input data type. Can be 'csv' or 'avro'.
+        </description>
+    </property>
+
+    <property>
+        <name>dst.node</name>
+        <value>hdfs://nn-h8</value>
+        <description>
+            Destination node
+        </description>
+    </property>
+
+    <property>
+        <name>WORKFLOW_NAME</name>
+        <value>DAP-DI-${dataset}-Distcp</value>
+        <description>
+            Name of the workflow. Should be changed only in job*.properties file.
+        </description>
+    </property>
+
+    <property>
+        <name>src.permissions.copy.mode</name>
+        <value>ugp</value>
+        <description>
+            Keeping permissions and owner mode. Can be combined of 'u'-user, 'g'-group, 'p'-permission.
+        </description>
+    </property>
+
+    <property>
+        <name>auditId</name>
+        <value>{{AuditId}}</value>
+        <description>
+            Audit Id for QDM Report
+        </description>
+    </property>
+
+    <!-- configure to change permissions for the input -->
+
+    <property>
+        <name>src.permissions.set</name>
+        <value>false</value>
+        <description>
+            Is set source path permission and owner. Can be 'true' or 'false'.
+        </description>
+    </property>
+
+    <property>
+        <name>src.permissions.mod</name>
+        <value>750</value>
+        <description>
+            Set source path permission mode if src.permissions.set is true. Has UNIX style like '750'.
+        </description>
+    </property>
+
+    <property>
+        <name>src.permissions.own</name>
+        <value>vdcs.user</value>
+        <description>
+            Set source path permission owner name if src.permissions.set is true.
+        </description>
+    </property>
+
+    <!--Properties expected from job.properties -->
+    <property>
+        <name>src.path</name>
+        <value></value>
+        <description>
+            Path to source data. Should be changed only in job*.properties file.
+        </description>
+    </property>
+
+    <property>
+        <name>dst.path</name>
+        <value></value>
+        <description>
+            Path to destination data. Should be changed only in job*.properties file.
+        </description>
+    </property>
+
+    <property>
+        <name>qdm.src.report.path</name>
+        <value></value>
+        <description>
+            Path to source Qdm Report
+        </description>
+    </property>
+
+    <property>
+        <name>qdm.dst.report.path</name>
+        <value></value>
+        <description>
+            Path to destination Qdm Report
+        </description>
+    </property>
+
+    <property>
+        <name>row.count.path</name>
+        <value></value>
+        <description>
+            Path to row count data. Should be changed only in job*.properties file.
+        </description>
+    </property>
+
+    <property>
+        <name>log.path</name>
+        <value></value>
+        <description>
+            Path to logs. Should be changed only in job*.properties file.
+        </description>
+    </property>
+
+</configuration>
