@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+
 pattern={{property}}
 
 sourceFile=${PWD}/"$1"
@@ -11,9 +13,8 @@ while IFS="=" read -r key value; do
       '#'*) ;;
       '') ;;
       *)
-        eval "$key=\"$value\""	
 		whatToReplace=${pattern/property/${key}}
-		sed "s^${whatToReplace}^${value}^g" 'substitution.src.tmp' > 'substitution.dst.tmp'
+		sed -e "s^${whatToReplace}^${value}^g" -e "s^${key}=.*^${key}=${value}^" 'substitution.src.tmp' > 'substitution.dst.tmp'
 		mv substitution.dst.tmp substitution.src.tmp
     esac
 done < "$appProperties"
@@ -28,3 +29,5 @@ done < "$appProperties"
 [ -f 'substitution.dst.tmp' ] &&{
 	rm 'substitution.dst.tmp'
 }
+
+exit 0

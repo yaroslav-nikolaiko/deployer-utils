@@ -1,5 +1,5 @@
 #!/bin/bash
-BASEDIR=$(dirname $0)
+set -e
 
 touch merge.dst.tmp
 
@@ -8,7 +8,7 @@ previousArg=''
 for var in "$@"
 do
 	if [ "$previousArg" = '--cluster' ]; then
-		cat ${BASEDIR}/conf/clusters/${var}/cluster.properties >> merge.dst.tmp
+		cat ${DEPLOYER_CONF_DIR}/clusters/${var}/cluster.properties
 	elif [ -f "$var" ]; then
 		cat "$var" >> merge.dst.tmp
 	fi	
@@ -20,3 +20,5 @@ done
 	cat 'merge.dst.tmp'
 	rm 'merge.dst.tmp'
 }
+
+exit 0
